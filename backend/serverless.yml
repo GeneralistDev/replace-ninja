@@ -1,0 +1,76 @@
+service: replaceninja
+
+frameworkVersion: ">=1.34.1"
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  stage: prod
+  region: us-east-2
+  environment:
+    LINK_TABLE: ${self:custom.linkTable}
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - "dynamodb:GetItem"
+        - "dynamodb:PutItem"
+        - "dynamodb:DeleteItem"
+      Resource: "arn:aws:dynamodb:us-east-2:334069501049:table/ProdNinjaLinkTable"
+    - Effect: "Allow"
+      Action:
+        - "dynamodb:Query"
+      Resource: "arn:aws:dynamodb:us-east-2:334069501049:table/ProdNinjaLinkTable/index/ByLocation"
+
+custom:
+  linkTable: ProdNinjaLinkTable
+
+functions:
+  index:
+    handler: src/index.handler
+    events:
+      - http:
+          path: '/'
+          method: 'get'
+  replace:
+    handler: src/handler.handler
+    events:
+      - http:
+          path: '/{key+}'
+          method: get
+          cors: true
+  update:
+    handler: src/update.handler
+    events:
+      - http:
+          path: 'update'
+          method: post
+          cors: true
+
+resources:
+  Resources:
+    LinkTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ProdNinjaLinkTable
+        KeySchema:
+          - AttributeName: Key
+            KeyType: HASH
+        AttributeDefinitions:
+          - AttributeName: Key
+            AttributeType: S
+          - AttributeName: location
+            AttributeType: S
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        GlobalSecondaryIndexes:
+          - IndexName: ByLocation
+            KeySchema: 
+              - AttributeName: location
+                KeyType: HASH
+            Projection:
+              ProjectionType: ALL
+            ProvisionedThroughput:
+              ReadCapacityUnits: 1
+              WriteCapacityUnits: 1
+
