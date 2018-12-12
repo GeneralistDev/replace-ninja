@@ -28,12 +28,16 @@ module.exports.handler = async (event, context) => {
       statusCode: 307,
       headers: {
         Location: result.Item.location,
+        'Cache-Control': 'no-cache'
       },
     };
   } catch(e) {
     console.log(e);
     return {
       statusCode: 404,
+      headers: {
+        'Cache-Control': 'no-cache'
+      }
     };
   }
 };

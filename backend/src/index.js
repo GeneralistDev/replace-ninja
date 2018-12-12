@@ -27,6 +27,7 @@ module.exports.handler = async (event, context) => {
         statusCode: 200,
         headers: {
           'Content-Type': 'text/html',
+          'Cache-Control': 'no-cache',
           'Strict-Transport-Security': 'max-age=63072000; includeSubDomains; preload'
         },
         body: indexHtml,
@@ -36,6 +37,9 @@ module.exports.handler = async (event, context) => {
 
       return {
         statusCode: 500,
+        headers: {
+          'Cache-Control': 'no-cache'
+        },
         body: JSON.stringify(err)
       };
     }
@@ -45,6 +49,7 @@ module.exports.handler = async (event, context) => {
       statusCode: 200,
       headers: {
         'Content-Type': 'text/html',
+        'Cache-Control': 'no-cache',
         'Strict-Transport-Security': 'max-age=63072000; includeSubDomains; preload'
       },
       body: indexHtml,

@@ -47,6 +47,7 @@ module.exports.handler = async (event, context) => {
               statusCode: 403,
               headers: {
                 'Access-Control-Allow-Origin': '*',
+                'Cache-Control': 'no-cache',
               },
               body: 'Password incorrect'
             }
@@ -79,7 +80,8 @@ module.exports.handler = async (event, context) => {
               statusCode: 200,
               headers: {
                 'Access-Control-Allow-Origin': '*',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Cache-Control': 'no-cache'
               },
               body: JSON.stringify({
                 key: body.key
@@ -90,7 +92,8 @@ module.exports.handler = async (event, context) => {
               statusCode: 500,
               headers: {
                 'Access-Control-Allow-Origin': '*',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Cache-Control': 'no-cache'
               },
             };
           }
@@ -113,7 +116,8 @@ module.exports.handler = async (event, context) => {
               statusCode: 200,
               headers: {
                 'Access-Control-Allow-Origin': '*',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Cache-Control': 'no-cache'
               },
               body: JSON.stringify({
                 key: body.key
@@ -124,7 +128,8 @@ module.exports.handler = async (event, context) => {
               statusCode: 500,
               headers: {
                 'Access-Control-Allow-Origin': '*',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Cache-Control': 'no-cache'
               },
             };
           }
@@ -134,7 +139,8 @@ module.exports.handler = async (event, context) => {
           statusCode: 200,
           headers: {
             'Access-Control-Allow-Origin': '*',
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Cache-Control': 'no-cache'
           },
           body: JSON.stringify({
             key: item.Key
@@ -162,7 +168,8 @@ module.exports.handler = async (event, context) => {
             statusCode: 201,
             headers: {
               'Access-Control-Allow-Origin': '*',
-              'Content-Type': 'application/json'
+              'Content-Type': 'application/json',
+              'Cache-Control': 'no-cache'
             },
             body: JSON.stringify({
               key: body.key
@@ -173,7 +180,8 @@ module.exports.handler = async (event, context) => {
             statusCode: 500,
             headers: {
               'Access-Control-Allow-Origin': '*',
-              'Content-Type': 'application/json'
+              'Content-Type': 'application/json',
+              'Cache-Control': 'no-cache'
             },
           };
         }
@@ -195,7 +203,8 @@ module.exports.handler = async (event, context) => {
             statusCode: 201,
             headers: {
               'Access-Control-Allow-Origin': '*',
-              'Content-Type': 'application/json'
+              'Content-Type': 'application/json',
+              'Cache-Control': 'no-cache'
             },
             body: JSON.stringify({
               key: key
@@ -206,7 +215,8 @@ module.exports.handler = async (event, context) => {
             statusCode: 500,
             headers: {
               'Access-Control-Allow-Origin': '*',
-              'Content-Type': 'application/json'
+              'Content-Type': 'application/json',
+              'Cache-Control': 'no-cache'
             },
           };
         }
@@ -219,7 +229,8 @@ module.exports.handler = async (event, context) => {
       statusCode: 500,
       headers: {
         'Access-Control-Allow-Origin': '*',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Cache-Control': 'no-cache'
       },
     };
   }
